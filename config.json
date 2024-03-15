@@ -1,0 +1,9 @@
+{
+    "vllm":{
+        "model": "..\\Yi-34B-Chat-4bits",
+        "max_new_tokens": 32,
+        "top_k": 10,
+        "top_p": 0.95,
+        "temperature": 0.8
+    }
+}
