@@ -1,5 +1,5 @@
 import json
-from langchain_community.llms import VLLM
+from vllm import LLM, SamplingParams
 
 # 从config.json文件中加载模型配置
 def load_config():
@@ -8,18 +8,19 @@ def load_config():
 
 # 初始化VLLM模型
 def init_model(config):
-    return VLLM(
+    return LLM(
         model=config['vllm']['model'],
+        dtype='float16'
+    ),  SamplingParams(
         max_new_tokens=config['vllm']['max_new_tokens'],
         top_k=config['vllm']['top_k'],
         top_p=config['vllm']['top_p'],
-        temperature=config['vllm']['temperature']
-    )
+        temperature=config['vllm']['temperature'])
 
 # 主函数
 def main():
     config = load_config()
-    llm = init_model(config)
+    llm, sampling_params = init_model(config)
     
     print("VLLM模型已加载。请输入提示（输入'退出'以结束）：")
     
